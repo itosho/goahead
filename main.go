@@ -18,16 +18,16 @@ func main() {
 	flag.Usage = usage
 
 	flag.Parse()
-	args := flag.Args()
 
 	if flag.NFlag() > 1 {
 		log.Fatal("Too many optional arguments.")
 	}
 
 	if flag.NArg() != 1 {
-		log.Fatal("invalid file paths.")
+		log.Fatal("Invalid file paths.")
 	}
 
+	args := flag.Args()
 	filePath := args[0]
 	fp, err := os.Open(filePath)
 	if err != nil {
@@ -36,19 +36,21 @@ func main() {
 	defer fp.Close()
 
 	if *bytes > 0 { // use -c option
-		body, e := ioutil.ReadFile(filePath)
-		if e != nil {
+		body, _ := ioutil.ReadFile(filePath)
+		// @TODO add error handling
+		/*if e != nil {
 			log.Fatal(err)
-		}
+		}*/
 
 		if *bytes >= len(body) {
 			fmt.Print(string(body))
 		} else {
 			reader := bufio.NewReader(fp)
-			b, e := reader.Peek(*bytes)
-			if e != nil {
-				log.Fatal(e)
-			}
+			b, _ := reader.Peek(*bytes)
+			// @TODO add error handling
+			/*if e != nil {
+				log.Fatal(err)
+			}*/
 			fmt.Println(string(b))
 		}
 
