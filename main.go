@@ -15,18 +15,20 @@ var (
 )
 
 func main() {
+	flag.Usage = usage
+
 	flag.Parse()
 	args := flag.Args()
-	filePath := args[0]
 
 	if flag.NFlag() > 1 {
 		log.Fatal("Too many optional arguments.")
 	}
 
-	if flag.NArg() > 1 {
-		log.Fatal("Too many file paths.")
+	if flag.NArg() != 1 {
+		log.Fatal("invalid file paths.")
 	}
 
+	filePath := args[0]
 	fp, err := os.Open(filePath)
 	if err != nil {
 		log.Fatal(err)
@@ -66,4 +68,10 @@ func main() {
 			fmt.Println(err)
 		}
 	}
+}
+
+func usage() {
+	fmt.Println("usage: goahead [-n lines | -c bytes] [file]")
+	flag.PrintDefaults()
+	os.Exit(0)
 }
