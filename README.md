@@ -1,7 +1,7 @@
 # goahead
 goahead is a CLI tool simplified the [head](https://en.wikipedia.org/wiki/Head_(Unix)) command.
 
-## install
+## Install
 ```
 $ go get github.com/itosho/goahead
 ```
