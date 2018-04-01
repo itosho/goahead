@@ -1,5 +1,5 @@
 # goahead
-goahead is a CLI tool simplified the `head` command.
+goahead is a CLI tool simplified the [head](https://en.wikipedia.org/wiki/Head_(Unix)) command.
 
 ## install
 ```
