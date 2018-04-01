@@ -28,8 +28,8 @@ func main() {
 	args := flag.Args()
 	file := args[0]
 
-	delimiter := getDelimiter()
-	head(delimiter, file)
+	unit := getUnit()
+	head(unit, file)
 }
 
 func usage() {

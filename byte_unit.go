@@ -8,9 +8,9 @@ import (
 	"os"
 )
 
-type byte struct{}
+type byteUnit struct{}
 
-func (b *byte) display(file string) {
+func (bu *byteUnit) display(file string) {
 	body, err := ioutil.ReadFile(file)
 	if err != nil {
 		log.Fatal(err)

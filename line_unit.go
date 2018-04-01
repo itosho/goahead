@@ -7,9 +7,9 @@ import (
 	"os"
 )
 
-type line struct{}
+type lineUnit struct{}
 
-func (l *line) display(file string) {
+func (lu *lineUnit) display(file string) {
 	fp, err := os.Open(file)
 	if err != nil {
 		log.Fatal(err)
