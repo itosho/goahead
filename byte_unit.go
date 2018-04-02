@@ -9,10 +9,11 @@ import (
 
 type byteUnit struct{}
 
-func (bu *byteUnit) display(file string) (int, error) {
+func (bu *byteUnit) display(file string) int {
 	body, err := ioutil.ReadFile(file)
 	if err != nil {
-		return ExitError, err
+		fmt.Fprintln(os.Stderr, err)
+		return ExitError
 	}
 
 	if *bytes >= len(body) {
@@ -20,17 +21,19 @@ func (bu *byteUnit) display(file string) (int, error) {
 	} else {
 		fp, err := os.Open(file)
 		if err != nil {
-			return ExitError, err
+			fmt.Fprintln(os.Stderr, err)
+			return ExitError
 		}
 		defer fp.Close()
 
 		reader := bufio.NewReader(fp)
 		body, err := reader.Peek(*bytes)
 		if err != nil {
-			return ExitError, err
+			fmt.Fprintln(os.Stderr, err)
+			return ExitError
 		}
 		fmt.Println(string(body))
 	}
 
-	return ExitSuccess, nil
+	return ExitSuccess
 }

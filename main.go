@@ -35,10 +35,7 @@ func main() {
 	file := args[0]
 
 	unit := getUnit()
-	code, err := head(unit, file)
-	if err != nil {
-		fmt.Fprintln(os.Stderr, err)
-	}
+	code := head(unit, file)
 
 	os.Exit(code)
 }

@@ -1,10 +1,10 @@
 package main
 
 type unit interface {
-	display(string) (int, error)
+	display(string) int
 }
 
-func head(u unit, file string) (int, error) {
+func head(u unit, file string) int {
 	return u.display(file)
 }
 

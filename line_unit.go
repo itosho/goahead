@@ -8,10 +8,11 @@ import (
 
 type lineUnit struct{}
 
-func (lu *lineUnit) display(file string) (int, error) {
+func (lu *lineUnit) display(file string) int {
 	fp, err := os.Open(file)
 	if err != nil {
-		return ExitError, err
+		fmt.Fprintln(os.Stderr, err)
+		return ExitError
 	}
 	defer fp.Close()
 
@@ -26,8 +27,9 @@ func (lu *lineUnit) display(file string) (int, error) {
 	}
 
 	if err = scanner.Err(); err != nil {
-		return ExitError, err
+		fmt.Fprintln(os.Stderr, err)
+		return ExitError
 	}
 
-	return ExitSuccess, nil
+	return ExitSuccess
 }
