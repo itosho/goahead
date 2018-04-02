@@ -3,16 +3,15 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"log"
 	"os"
 )
 
 type lineUnit struct{}
 
-func (lu *lineUnit) display(file string) {
+func (lu *lineUnit) display(file string) (int, error) {
 	fp, err := os.Open(file)
 	if err != nil {
-		log.Fatal(err)
+		return 1, err
 	}
 	defer fp.Close()
 
@@ -27,6 +26,8 @@ func (lu *lineUnit) display(file string) {
 	}
 
 	if err = scanner.Err(); err != nil {
-		log.Fatal(err)
+		return 1, err
 	}
+
+	return 0, nil
 }

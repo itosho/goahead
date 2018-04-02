@@ -29,7 +29,12 @@ func main() {
 	file := args[0]
 
 	unit := getUnit()
-	head(unit, file)
+	code, err := head(unit, file)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	os.Exit(code)
 }
 
 func usage() {

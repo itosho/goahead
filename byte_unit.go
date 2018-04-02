@@ -4,16 +4,15 @@ import (
 	"bufio"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"os"
 )
 
 type byteUnit struct{}
 
-func (bu *byteUnit) display(file string) {
+func (bu *byteUnit) display(file string) (int, error) {
 	body, err := ioutil.ReadFile(file)
 	if err != nil {
-		log.Fatal(err)
+		return 1, err
 	}
 
 	if *bytes >= len(body) {
@@ -21,15 +20,17 @@ func (bu *byteUnit) display(file string) {
 	} else {
 		fp, err := os.Open(file)
 		if err != nil {
-			log.Fatal(err)
+			return 1, err
 		}
 		defer fp.Close()
 
 		reader := bufio.NewReader(fp)
 		body, err := reader.Peek(*bytes)
 		if err != nil {
-			log.Fatal(err)
+			return 1, err
 		}
 		fmt.Println(string(body))
 	}
+
+	return 0, nil
 }

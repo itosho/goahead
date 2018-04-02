@@ -1,11 +1,11 @@
 package main
 
 type unit interface {
-	display(string)
+	display(string) (int, error)
 }
 
-func head(u unit, file string) {
-	u.display(file)
+func head(u unit, file string) (int, error) {
+	return u.display(file)
 }
 
 func getUnit() unit {
