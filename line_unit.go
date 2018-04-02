@@ -11,6 +11,7 @@ type lineUnit struct{}
 func (lu *lineUnit) display(file string) int {
 	fp, err := os.Open(file)
 	if err != nil {
+		fmt.Fprintln(os.Stderr, "File Open Error. The following are the details.")
 		fmt.Fprintln(os.Stderr, err)
 		return ExitError
 	}
@@ -27,6 +28,7 @@ func (lu *lineUnit) display(file string) int {
 	}
 
 	if err = scanner.Err(); err != nil {
+		fmt.Fprintln(os.Stderr, "File Scan Error. The following are the details.")
 		fmt.Fprintln(os.Stderr, err)
 		return ExitError
 	}

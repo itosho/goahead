@@ -12,6 +12,7 @@ type byteUnit struct{}
 func (bu *byteUnit) display(file string) int {
 	body, err := ioutil.ReadFile(file)
 	if err != nil {
+		fmt.Fprintln(os.Stderr, "File Read Error. The following are the details.")
 		fmt.Fprintln(os.Stderr, err)
 		return ExitError
 	}
@@ -21,6 +22,7 @@ func (bu *byteUnit) display(file string) int {
 	} else {
 		fp, err := os.Open(file)
 		if err != nil {
+			fmt.Fprintln(os.Stderr, "File Open Error. The following are the details.")
 			fmt.Fprintln(os.Stderr, err)
 			return ExitError
 		}
@@ -29,6 +31,7 @@ func (bu *byteUnit) display(file string) int {
 		reader := bufio.NewReader(fp)
 		body, err := reader.Peek(*bytes)
 		if err != nil {
+			fmt.Fprintln(os.Stderr, "Byte Peek Error. The following are the details.")
 			fmt.Fprintln(os.Stderr, err)
 			return ExitError
 		}

@@ -24,11 +24,11 @@ func main() {
 	flag.Parse()
 
 	if flag.NFlag() > 1 {
-		log.Fatal("Too many optional arguments.")
+		log.Fatal("Too many options. Please specify `n` or `c` for option.")
 	}
 
 	if flag.NArg() != 1 {
-		log.Fatal("Invalid file paths.")
+		log.Fatal("Invalid Args. Please specify only one file.")
 	}
 
 	args := flag.Args()
