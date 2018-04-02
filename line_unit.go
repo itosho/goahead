@@ -11,7 +11,7 @@ type lineUnit struct{}
 func (lu *lineUnit) display(file string) (int, error) {
 	fp, err := os.Open(file)
 	if err != nil {
-		return 1, err
+		return ExitError, err
 	}
 	defer fp.Close()
 
@@ -26,8 +26,8 @@ func (lu *lineUnit) display(file string) (int, error) {
 	}
 
 	if err = scanner.Err(); err != nil {
-		return 1, err
+		return ExitError, err
 	}
 
-	return 0, nil
+	return ExitSuccess, nil
 }

@@ -7,6 +7,12 @@ import (
 	"os"
 )
 
+const (
+	ExitSuccess int = iota
+	ExitError
+	ExitFileError
+)
+
 var (
 	lines = flag.Int("n", 10, "lines")
 	bytes = flag.Int("c", 0, "bytes")
@@ -31,7 +37,7 @@ func main() {
 	unit := getUnit()
 	code, err := head(unit, file)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Fprintln(os.Stderr, err)
 	}
 
 	os.Exit(code)
@@ -40,5 +46,5 @@ func main() {
 func usage() {
 	fmt.Println("usage: goahead [-n lines | -c bytes] [file]")
 	flag.PrintDefaults()
-	os.Exit(0)
+	os.Exit(ExitSuccess)
 }
