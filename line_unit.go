@@ -6,7 +6,9 @@ import (
 	"os"
 )
 
-type lineUnit struct{}
+type lineUnit struct {
+	lines int
+}
 
 func (lu *lineUnit) display(file string) int {
 	fp, err := os.Open(file)
@@ -21,7 +23,7 @@ func (lu *lineUnit) display(file string) int {
 	i := 0
 	for scanner.Scan() {
 		i++
-		if i > *lines {
+		if i > lu.lines {
 			break
 		}
 		fmt.Println(scanner.Text())

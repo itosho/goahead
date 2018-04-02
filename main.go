@@ -13,12 +13,10 @@ const (
 	ExitFileError
 )
 
-var (
-	lines = flag.Int("n", 10, "lines")
-	bytes = flag.Int("c", 0, "bytes")
-)
-
 func main() {
+	var lines = flag.Int("n", 10, "lines")
+	var bytes = flag.Int("c", 0, "bytes")
+
 	flag.Usage = usage
 
 	flag.Parse()
@@ -34,7 +32,7 @@ func main() {
 	args := flag.Args()
 	file := args[0]
 
-	unit := getUnit()
+	unit := getUnit(*lines, *bytes)
 	code := head(unit, file)
 
 	os.Exit(code)

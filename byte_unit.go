@@ -7,7 +7,9 @@ import (
 	"os"
 )
 
-type byteUnit struct{}
+type byteUnit struct {
+	bytes int
+}
 
 func (bu *byteUnit) display(file string) int {
 	body, err := ioutil.ReadFile(file)
@@ -17,7 +19,7 @@ func (bu *byteUnit) display(file string) int {
 		return ExitError
 	}
 
-	if *bytes >= len(body) {
+	if bu.bytes >= len(body) {
 		fmt.Print(string(body))
 	} else {
 		fp, err := os.Open(file)
@@ -29,7 +31,7 @@ func (bu *byteUnit) display(file string) int {
 		defer fp.Close()
 
 		reader := bufio.NewReader(fp)
-		body, err := reader.Peek(*bytes)
+		body, err := reader.Peek(bu.bytes)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, "Byte Peek Error. The following are the details.")
 			fmt.Fprintln(os.Stderr, err)
